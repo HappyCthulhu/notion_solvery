@@ -5,6 +5,7 @@ from notifiers import get_notifier
 from backend.models import db, BookmarksForRemove, AllNotionPages
 from .logger_settings import logger
 from .parse_bookmarks import parse_bookmarks
+from ..models import db
 
 
 def get_duplicated_bookmarks_ids(bookmarks):
@@ -57,8 +58,9 @@ def get_bookmarks_ids_of_deleted_pages(notion_pages, bookmarks):
 
 
 def collect_pages_for_removing():
-    print(f'AllNotionPages: {AllNotionPages.query.all()}')
-    notion_pages = [{'title': page.title, 'page_url': page.link} for page in AllNotionPages.query.all()]
+    print('Задача начала выполняться')
+    print(f'AllNotionPages: {db.session.query(AllNotionPages).all()}')
+    notion_pages = [{'title': page.title, 'page_url': page.link} for page in db.session.query(AllNotionPages).all()]
     chrome_bookmarks = parse_bookmarks()
 
     # 1: если заметка была удалена в Notion: вся информация о закладке есть в браузере, но нет в списке страниц Notion)

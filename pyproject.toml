@@ -20,6 +20,9 @@ notion = "^0.0.28"
 Flask-Cors = "^3.0.10"
 flask-marshmallow = "^0.14.0"
 marshmallow-sqlalchemy = "^0.27.0"
+celery = "^5.2.3"
+redis = "^4.1.4"
+flower = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 
